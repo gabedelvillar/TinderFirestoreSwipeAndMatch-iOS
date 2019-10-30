@@ -9,6 +9,19 @@
 import UIKit
 
 class HomeBottomControlsStackView: UIStackView {
+    
+    static func createButton(image: UIImage) -> UIButton {
+        let btn = UIButton(type: .system)
+        btn.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.imageView?.contentMode = .scaleAspectFill
+        return btn
+    }
+    
+    let refreshBtn = createButton(image: #imageLiteral(resourceName: "refresh_circle"))
+    let dislikeBtn = createButton(image: #imageLiteral(resourceName: "dismiss_circle"))
+    let superLikeBtn = createButton(image: #imageLiteral(resourceName: "super_like_circle"))
+    let likeBtn = createButton(image: #imageLiteral(resourceName: "like_circle"))
+    let specialBtn = createButton(image: #imageLiteral(resourceName: "boost_circle"))
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -17,22 +30,7 @@ class HomeBottomControlsStackView: UIStackView {
     
     heightAnchor.constraint(equalToConstant: 100).isActive = true
     
-   let subViews = [ #imageLiteral(resourceName: "refresh_circle"), #imageLiteral(resourceName: "dismiss_circle"), #imageLiteral(resourceName: "super_like_circle"), #imageLiteral(resourceName: "like_circle"), #imageLiteral(resourceName: "boost_circle")].map { (img) -> UIView in
-      let btn = UIButton(type: .system)
-      btn.setImage(img.withRenderingMode(.alwaysOriginal), for: .normal)
-      return btn
-    }
-    
-//    // bottom row of buttons
-//    let bottomSubViews = [UIColor.red, .green, .blue, .yellow, .purple].map { (color) -> UIView in
-//      let view = UIView()
-//      view.backgroundColor = color
-//      return view
-//    }
-    
-    subViews.forEach { (view) in
-      addArrangedSubview(view)
-    }
+    [refreshBtn, dislikeBtn, superLikeBtn, likeBtn, specialBtn]
     
   }
   
