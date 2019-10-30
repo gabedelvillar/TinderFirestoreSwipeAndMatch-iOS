@@ -23,6 +23,7 @@
 		0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8ABF172347C59000972B01 /* CustomTextField.swift */; };
 		0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEB013B23401F0A00260EB7 /* Advertiser.swift */; };
 		0AF112882343D21C00ADB81F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF112872343D21C00ADB81F /* RegistrationController.swift */; };
+		0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8E9982368E3E700948F56 /* Bindable.swift */; };
 		D0BD91A2890F37321DE10FB3 /* Pods_SwipeMatchFirestoreLBTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1484BA10D8715B6F522EBAA6 /* Pods_SwipeMatchFirestoreLBTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		0A8ABF172347C59000972B01 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0AEB013B23401F0A00260EB7 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		0AF112872343D21C00ADB81F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		0AF8E9982368E3E700948F56 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		1484BA10D8715B6F522EBAA6 /* Pods_SwipeMatchFirestoreLBTA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchFirestoreLBTA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68D5A10CD7C60DA10B5F881 /* Pods-SwipeMatchFirestoreLBTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFirestoreLBTA.debug.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFirestoreLBTA/Pods-SwipeMatchFirestoreLBTA.debug.xcconfig"; sourceTree = "<group>"; };
 		FBB7857AB14D14DD78682D6A /* Pods-SwipeMatchFirestoreLBTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFirestoreLBTA.release.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFirestoreLBTA/Pods-SwipeMatchFirestoreLBTA.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				0A7590382333E29000DC9828 /* HomeController.swift */,
 				0AF112872343D21C00ADB81F /* RegistrationController.swift */,
 				0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */,
+				0AF8E9982368E3E700948F56 /* Bindable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */,
 				0A7590392333E29000DC9828 /* HomeController.swift in Sources */,
 				0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */,
 				0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */,
