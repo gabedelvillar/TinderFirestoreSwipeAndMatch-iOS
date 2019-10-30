@@ -91,9 +91,10 @@ class HomeController: UIViewController {
   
   @objc fileprivate func handleSettings(){
     
-    let registrationController = RegistrationController()
+    let settingsController = SettingsController()
+    let navigationControlller = UINavigationController(rootViewController: settingsController)
     
-    present(registrationController, animated: true)
+    present(navigationControlller, animated: true)
   }
   
   fileprivate func setupDummyCards(){

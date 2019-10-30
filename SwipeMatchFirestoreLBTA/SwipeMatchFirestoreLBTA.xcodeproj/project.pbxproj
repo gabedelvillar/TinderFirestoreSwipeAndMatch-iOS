@@ -21,6 +21,8 @@
 		0A759051233BCBFB00DC9828 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A759050233BCBFB00DC9828 /* CardView.swift */; };
 		0A89863B233E7B5A00867388 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A89863A233E7B5A00867388 /* User.swift */; };
 		0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8ABF172347C59000972B01 /* CustomTextField.swift */; };
+		0A94FFCD2369F848000B62B3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCC2369F848000B62B3 /* SettingsController.swift */; };
+		0A94FFCF236A05BD000B62B3 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */; };
 		0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEB013B23401F0A00260EB7 /* Advertiser.swift */; };
 		0AF112882343D21C00ADB81F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF112872343D21C00ADB81F /* RegistrationController.swift */; };
 		0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8E9982368E3E700948F56 /* Bindable.swift */; };
@@ -44,6 +46,8 @@
 		0A759050233BCBFB00DC9828 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		0A89863A233E7B5A00867388 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A8ABF172347C59000972B01 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		0A94FFCC2369F848000B62B3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		0AEB013B23401F0A00260EB7 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		0AF112872343D21C00ADB81F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0AF8E9982368E3E700948F56 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 				0AF112872343D21C00ADB81F /* RegistrationController.swift */,
 				0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */,
 				0AF8E9982368E3E700948F56 /* Bindable.swift */,
+				0A94FFCC2369F848000B62B3 /* SettingsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				0A75904E2333F13100DC9828 /* TopNavigationStackView.swift */,
 				0A759050233BCBFB00DC9828 /* CardView.swift */,
 				0A8ABF172347C59000972B01 /* CustomTextField.swift */,
+				0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,9 +296,11 @@
 				0A75904A2333E4E800DC9828 /* Extensions+UIView.swift in Sources */,
 				0A41BC8A233E854300D3E46D /* CardViewModel.swift in Sources */,
 				0A759051233BCBFB00DC9828 /* CardView.swift in Sources */,
+				0A94FFCD2369F848000B62B3 /* SettingsController.swift in Sources */,
 				0A75904F2333F13100DC9828 /* TopNavigationStackView.swift in Sources */,
 				0AF112882343D21C00ADB81F /* RegistrationController.swift in Sources */,
 				0A89863B233E7B5A00867388 /* User.swift in Sources */,
+				0A94FFCF236A05BD000B62B3 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
