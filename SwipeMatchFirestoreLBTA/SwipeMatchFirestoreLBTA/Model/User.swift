@@ -19,6 +19,9 @@ struct User: ProducesCardViewModel {
      var imgUrl3: String?
     var uid: String?
     
+    var minSeekingAge: Int?
+    var maxSeekingAge: Int?
+    
     
   
     
@@ -30,6 +33,9 @@ struct User: ProducesCardViewModel {
          self.imgUrl2 = dictionary["imgUrl2"] as? String
          self.imgUrl3 = dictionary["imgUrl3"] as? String
         self.uid = dictionary["uid"] as? String ?? ""
+        self.minSeekingAge = dictionary["minSeekingAge"] as? Int
+        self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int
+        
        
 //        self.imageNames = [imgUrl1]
         
