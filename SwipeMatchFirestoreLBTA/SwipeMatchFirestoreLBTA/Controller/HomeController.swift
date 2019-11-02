@@ -36,12 +36,32 @@ class HomeController: UIViewController {
     bottomControls.refreshBtn.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
    
     setupLayout()
+    fetchCurrentUser()
     
-    setupDummyCards()
+//    setupDummyCards()
+//
+//    fetchUsersFromFirestore()
     
-    fetchUsersFromFirestore()
  
   }
+    
+    fileprivate var user: User?
+    
+    fileprivate func fetchCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err{
+                print(err)
+                return
+            }
+            
+            guard let dicrionary = snapshot?.data() else {return}
+            
+            self.user = User(dictionary: dicrionary)
+            self.fetchUsersFromFirestore()
+        }
+    }
     
     @objc fileprivate func handleRefresh(){
         fetchUsersFromFirestore()
@@ -51,7 +71,7 @@ class HomeController: UIViewController {
     
     
     fileprivate func fetchUsersFromFirestore(){
-        
+        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else {return}
         // intoduction of pagination
         
         let hud = JGProgressHUD(style: .dark)
@@ -59,7 +79,7 @@ class HomeController: UIViewController {
         hud.textLabel.text = "Fetching Users"
         hud.show(in: self.view)
         
-        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastfetchUser?.uid] ?? [""]).limit(to: 2)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         
             query.getDocuments { (snapshot, err) in
                 hud.dismiss()
