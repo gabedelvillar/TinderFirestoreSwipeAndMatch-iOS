@@ -11,11 +11,18 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
+protocol SettingsControllerDelegate {
+    func didSaveSettings()
+}
+
 class CustomImagePickerkController: UIImagePickerController {
     var imgBtn: UIButton?
 }
 
 class SettingsController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var delegate: SettingsControllerDelegate?
+    
     lazy var imgBtn1 = createButton(selector: #selector(handleSelectPhoto))
     lazy var imgBtn2 = createButton(selector: #selector(handleSelectPhoto))
     lazy var imgBtn3 = createButton(selector: #selector(handleSelectPhoto))
@@ -293,8 +300,13 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         
         navigationItem.rightBarButtonItems = [
          UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
-          UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
+          UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         ]
+    }
+    
+    @objc fileprivate func handleLogout(){
+        try? Auth.auth().signOut()
+        dismiss(animated: true)
     }
     
     @objc fileprivate func handleSave(){
@@ -323,6 +335,9 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             }
             
             print("finished saving user info")
+            self.dismiss(animated: true) {
+                self.delegate?.didSaveSettings() // I want to refetch my cards inside of homeController
+            }
         }
         
         

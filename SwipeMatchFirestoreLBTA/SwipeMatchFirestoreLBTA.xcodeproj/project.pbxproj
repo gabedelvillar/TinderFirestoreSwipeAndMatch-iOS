@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A00BC2423666CFD002933BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A00BC2323666CFD002933BD /* GoogleService-Info.plist */; };
 		0A30D57C236CF45000544C93 /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A30D57B236CF45000544C93 /* AgeRangeCell.swift */; };
+		0A386A44236F7733005A7D36 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A42236F7733005A7D36 /* LoginController.swift */; };
+		0A386A45236F7733005A7D36 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A43236F7733005A7D36 /* LoginViewModel.swift */; };
+		0A386A48236F8362005A7D36 /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A47236F8362005A7D36 /* UserDetailsController.swift */; };
+		0A386A4A236F9549005A7D36 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A49236F9549005A7D36 /* SwipingPhotosController.swift */; };
 		0A41BC8A233E854300D3E46D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41BC89233E854300D3E46D /* CardViewModel.swift */; };
 		0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */; };
 		0A7590372333E29000DC9828 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7590362333E29000DC9828 /* AppDelegate.swift */; };
@@ -33,6 +37,10 @@
 /* Begin PBXFileReference section */
 		0A00BC2323666CFD002933BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A30D57B236CF45000544C93 /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
+		0A386A42236F7733005A7D36 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0A386A43236F7733005A7D36 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0A386A47236F8362005A7D36 /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
+		0A386A49236F9549005A7D36 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		0A41BC89233E854300D3E46D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		0A7590332333E29000DC9828 /* SwipeMatchFirestoreLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestoreLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,9 +78,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A386A41236F7703005A7D36 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0A386A42236F7733005A7D36 /* LoginController.swift */,
+				0A386A43236F7733005A7D36 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0A386A46236F8338005A7D36 /* UserDetails */ = {
+			isa = PBXGroup;
+			children = (
+				0A386A47236F8362005A7D36 /* UserDetailsController.swift */,
+				0A386A49236F9549005A7D36 /* SwipingPhotosController.swift */,
+			);
+			path = UserDetails;
+			sourceTree = "<group>";
+		};
 		0A41BC87233E847300D3E46D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0A386A46236F8338005A7D36 /* UserDetails */,
+				0A386A41236F7703005A7D36 /* Login */,
 				0A7590382333E29000DC9828 /* HomeController.swift */,
 				0AF112872343D21C00ADB81F /* RegistrationController.swift */,
 				0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */,
@@ -289,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A386A48236F8362005A7D36 /* UserDetailsController.swift in Sources */,
 				0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */,
 				0A7590392333E29000DC9828 /* HomeController.swift in Sources */,
 				0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */,
@@ -297,13 +326,16 @@
 				0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */,
 				0A7590372333E29000DC9828 /* AppDelegate.swift in Sources */,
 				0A30D57C236CF45000544C93 /* AgeRangeCell.swift in Sources */,
+				0A386A45236F7733005A7D36 /* LoginViewModel.swift in Sources */,
 				0A75904A2333E4E800DC9828 /* Extensions+UIView.swift in Sources */,
 				0A41BC8A233E854300D3E46D /* CardViewModel.swift in Sources */,
 				0A759051233BCBFB00DC9828 /* CardView.swift in Sources */,
+				0A386A44236F7733005A7D36 /* LoginController.swift in Sources */,
 				0A94FFCD2369F848000B62B3 /* SettingsController.swift in Sources */,
 				0A75904F2333F13100DC9828 /* TopNavigationStackView.swift in Sources */,
 				0AF112882343D21C00ADB81F /* RegistrationController.swift in Sources */,
 				0A89863B233E7B5A00867388 /* User.swift in Sources */,
+				0A386A4A236F9549005A7D36 /* SwipingPhotosController.swift in Sources */,
 				0A94FFCF236A05BD000B62B3 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

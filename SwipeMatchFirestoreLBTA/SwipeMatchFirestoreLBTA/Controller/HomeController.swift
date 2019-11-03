@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController {
+class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
+  
   
   let topStackView = TopNavigationStackView()
    let cardsDeckView = UIView()
@@ -44,6 +45,24 @@ class HomeController: UIViewController {
     
  
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginController()
+            loginController.delegate = self
+            
+            let navController = UINavigationController(rootViewController: loginController)
+            present(navController, animated: true)
+        }
+        
+       
+    }
+    
+    func didFinishLogingIn() {
+        fetchCurrentUser()
+    }
     
     fileprivate var user: User?
     
@@ -92,17 +111,28 @@ class HomeController: UIViewController {
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastfetchUser = user
-                self.setupUserFromCard(user: user)
+                
+                if user.uid != Auth.auth().currentUser?.uid {
+                    self.setupCardFromUser(user: user)
+                }
+                
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastfetchUser = user
+               
                
             })
             
         }
     }
     
-    fileprivate func setupUserFromCard(user: User){
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        let userDetailsController = UserDetailsController()
+        present(userDetailsController, animated: true)
+    }
+    
+    fileprivate func setupCardFromUser(user: User){
         let cardView = CardView(frame: .zero)
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
@@ -112,6 +142,7 @@ class HomeController: UIViewController {
   @objc fileprivate func handleSettings(){
     
     let settingsController = SettingsController()
+    settingsController.delegate = self
     let navigationControlller = UINavigationController(rootViewController: settingsController)
     
     present(navigationControlller, animated: true)
@@ -127,6 +158,11 @@ class HomeController: UIViewController {
       cardView.fillSuperview()
     }
   }
+
+func didSaveSettings() {
+      fetchCurrentUser()
+  }
+  
   
   // MARK:- Fileprivate
   

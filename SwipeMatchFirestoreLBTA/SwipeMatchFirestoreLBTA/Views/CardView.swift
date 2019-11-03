@@ -9,11 +9,17 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate {
+    func didTapMoreInfo(cardViewModel: CardViewModel)
+}
+
 class CardView: UIView {
+    
+    var delegate: CardViewDelegate?
   
   var cardViewModel: CardViewModel! {
     didSet {
-      let imgName = cardViewModel.imgNames.first ?? ""
+      let imgName = cardViewModel.imgUrls.first ?? ""
 //      imgView.image = UIImage(named: imgName)
         // load our image using some kind of url instead
         
@@ -26,7 +32,7 @@ class CardView: UIView {
       
       
       
-      (0..<cardViewModel.imgNames.count).forEach { (_) in
+      (0..<cardViewModel.imgUrls.count).forEach { (_) in
         let barView = UIView()
         barView.backgroundColor = barDeselectedColor
         barsStackView.addArrangedSubview(barView)
@@ -92,6 +98,17 @@ class CardView: UIView {
     }
     
   }
+    
+    fileprivate let moreInfoBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setImage(#imageLiteral(resourceName: "info_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.addTarget(self, action: #selector(handleMoreInfo), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc fileprivate func handleMoreInfo() {
+        delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
+    }
   
   fileprivate func setupLayout() {
     layer.cornerRadius = 10
@@ -116,6 +133,9 @@ class CardView: UIView {
     
     informationLbl.textColor = .white
     informationLbl.numberOfLines = 0
+    
+    addSubview(moreInfoBtn)
+    moreInfoBtn.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 16), size: .init(width: 44, height: 44))
   }
   
   fileprivate let barsStackView = UIStackView()

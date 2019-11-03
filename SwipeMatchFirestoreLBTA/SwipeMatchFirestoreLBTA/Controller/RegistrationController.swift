@@ -31,6 +31,8 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
 
 
 class RegistrationController: UIViewController {
+    
+    var delegate: LoginControllerDelegate?
   
   // UI Components
   
@@ -56,7 +58,7 @@ class RegistrationController: UIViewController {
     }
   
   let fullNameTextField: CustomTextField = {
-    let tf = CustomTextField(padding: 24)
+    let tf = CustomTextField(padding: 24, height: 50)
     tf.placeholder = "Enter full name"
     tf.backgroundColor = .white
     tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
@@ -64,7 +66,7 @@ class RegistrationController: UIViewController {
   }()
   
   let emailTextField: CustomTextField = {
-    let tf = CustomTextField(padding: 24)
+    let tf = CustomTextField(padding: 24, height: 50)
     tf.placeholder = "Enter email"
     tf.keyboardType = .emailAddress
     tf.backgroundColor = .white
@@ -73,7 +75,7 @@ class RegistrationController: UIViewController {
   }()
   
   let passwordTextField: CustomTextField = {
-    let tf = CustomTextField(padding: 24)
+    let tf = CustomTextField(padding: 24, height: 50)
     tf.placeholder = "Enter password"
     tf.backgroundColor = .white
     tf.isSecureTextEntry = true
@@ -271,8 +273,24 @@ class RegistrationController: UIViewController {
       overallStackView.axis = .vertical
     }
   }
+    
+    let goToLoginBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Go to Login", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        btn.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc fileprivate func handleGoToLogin() {
+        let loginController = LoginController()
+        navigationController?.pushViewController(loginController, animated: true)
+    }
   
   fileprivate func setupLayout() {
+    
+    navigationController?.isNavigationBarHidden = true
     
     overallStackView.axis = .horizontal
     selectPhotoBtn.widthAnchor.constraint(equalToConstant: 275).isActive = true
@@ -283,6 +301,10 @@ class RegistrationController: UIViewController {
     overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
     
     overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    
+    view.addSubview(goToLoginBtn)
+    
+    goToLoginBtn.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
   }
   
   let gradientLayer = CAGradientLayer()
