@@ -19,13 +19,18 @@ class CardView: UIView {
   
   var cardViewModel: CardViewModel! {
     didSet {
-      let imgName = cardViewModel.imgUrls.first ?? ""
+//      let imgName = cardViewModel.imgUrls.first ?? ""
 //      imgView.image = UIImage(named: imgName)
         // load our image using some kind of url instead
         
-        if let url = URL(string: imgName){
-            imgView.sd_setImage(with: url)
-        }
+//        if let url = URL(string: imgName){
+////            imgView.sd_setImage(with: url)
+//
+//            imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
+//        }
+//
+        
+        swipingPhotosController.cardViewModel = self.cardViewModel
         
       informationLbl.attributedText = cardViewModel.attributedString
       informationLbl.textAlignment = cardViewModel.textAlignment
@@ -47,10 +52,10 @@ class CardView: UIView {
   
   fileprivate func setupImgIndexObserver() {
     cardViewModel.imgIndexObserver = {[unowned self] (idx, imageUrl) in
-      print("changing phow from view model")
+      print("changing photo from view model")
         
         if let url = URL(string: imageUrl){
-            self.imgView.sd_setImage(with: url)
+//            self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
         }
         
       
@@ -65,12 +70,13 @@ class CardView: UIView {
     }
   }
   
-  fileprivate let imgView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+//  fileprivate let imgView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    fileprivate let swipingPhotosController = SwipingPhotosController(isCardViewMode: true)
   fileprivate let gradientLayer = CAGradientLayer()
   fileprivate let informationLbl = UILabel()
   
   // Configurations
-  fileprivate let threshold: CGFloat = 100
+  fileprivate let threshold: CGFloat = 80
   
 
   
@@ -114,14 +120,14 @@ class CardView: UIView {
     layer.cornerRadius = 10
     clipsToBounds = true
     
+    let swipingPhotosView = swipingPhotosController.view!
+    
    
     
-    imgView.contentMode = .scaleAspectFill
+    addSubview(swipingPhotosView)
+    swipingPhotosView.fillSuperview()
     
-    addSubview(imgView)
-    imgView.fillSuperview()
-    
-     setupBarStackView()
+//     setupBarStackView()
     
     // add a gradient layer somehow
     

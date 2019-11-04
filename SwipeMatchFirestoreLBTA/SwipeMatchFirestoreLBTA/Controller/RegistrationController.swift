@@ -16,6 +16,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
                let img = info[.originalImage] as? UIImage
         
         registrationViewModel.bindableImg.value = img
+        registrationViewModel.checkFromValididity()
 //        registrationViewModel.image = img
                
        

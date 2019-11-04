@@ -28,6 +28,16 @@ class RegistrationViewModel {
   var email: String? {didSet {checkFromValididity()}}
   var password: String? {didSet{checkFromValididity()}}
     
+    
+    func checkFromValididity () {
+        let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false && bindableImg.value != nil
+      
+      bindableIsFormValid.value = isFormValid
+      
+      //isFormValidObserver?(isFormValid)
+      }
+    
+    
     func performRegistration(completion: @escaping (Error?)->()) {
         
         guard let email = email, let password = password else {return}
@@ -86,7 +96,14 @@ class RegistrationViewModel {
     
     fileprivate func saveInfoToFirebase(imgUrl: String, completion: @escaping (Error?) -> ()){
         let uid = Auth.auth().currentUser?.uid ?? ""
-        let docData = ["fullName":fullName ?? "", "uid": uid, "imgUrl1":imgUrl]
+        let docData = [
+            "fullName":fullName ?? "",
+            "uid": uid,
+            "imgUrl1":imgUrl,
+            "age": 18,
+            "minSeekingAge" : SettingsController.defaultMinSeekingAge,
+            "maxSeekingAge" : SettingsController.defaultMaxSeekingAge
+            ] as [String : Any]
         Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
             if let err = err {
                 completion(err)
@@ -97,14 +114,7 @@ class RegistrationViewModel {
         }
     }
   
-  fileprivate func checkFromValididity () {
-    let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
-    
-    bindableIsFormValid.value = isFormValid
-    
-    //isFormValidObserver?(isFormValid)
-    }
-  
+ 
     
     var bindableIsFormValid = Bindable<Bool>()
     

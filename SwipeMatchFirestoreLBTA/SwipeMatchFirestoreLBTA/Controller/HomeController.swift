@@ -90,8 +90,11 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
     
     fileprivate func fetchUsersFromFirestore(){
-        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else {return}
+//        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else {return}
         // intoduction of pagination
+        
+        let minAge = user?.minSeekingAge ?? SettingsController.defaultMinSeekingAge
+        let maxAge = user?.maxSeekingAge ?? SettingsController.defaultMaxSeekingAge
         
         let hud = JGProgressHUD(style: .dark)
         
