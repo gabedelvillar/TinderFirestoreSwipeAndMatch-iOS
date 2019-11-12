@@ -14,6 +14,7 @@
 		0A386A48236F8362005A7D36 /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A47236F8362005A7D36 /* UserDetailsController.swift */; };
 		0A386A4A236F9549005A7D36 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A49236F9549005A7D36 /* SwipingPhotosController.swift */; };
 		0A41BC8A233E854300D3E46D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41BC89233E854300D3E46D /* CardViewModel.swift */; };
+		0A43A061237B73D100911FCF /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A43A060237B73D100911FCF /* MatchView.swift */; };
 		0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */; };
 		0A7590372333E29000DC9828 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7590362333E29000DC9828 /* AppDelegate.swift */; };
 		0A7590392333E29000DC9828 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7590382333E29000DC9828 /* HomeController.swift */; };
@@ -42,6 +43,7 @@
 		0A386A47236F8362005A7D36 /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		0A386A49236F9549005A7D36 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		0A41BC89233E854300D3E46D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		0A43A060237B73D100911FCF /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		0A5B75AA2349619C002E89E8 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		0A7590332333E29000DC9828 /* SwipeMatchFirestoreLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestoreLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7590362333E29000DC9828 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				0A8ABF172347C59000972B01 /* CustomTextField.swift */,
 				0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */,
 				0A30D57B236CF45000544C93 /* AgeRangeCell.swift */,
+				0A43A060237B73D100911FCF /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */,
 				0A7590392333E29000DC9828 /* HomeController.swift in Sources */,
 				0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */,
+				0A43A061237B73D100911FCF /* MatchView.swift in Sources */,
 				0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */,
 				0A75904D2333EC7300DC9828 /* HomeBottomControlsStackView.swift in Sources */,
 				0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */,
