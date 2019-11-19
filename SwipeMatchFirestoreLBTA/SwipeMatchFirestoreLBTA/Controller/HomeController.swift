@@ -50,7 +50,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
     var topCardView: CardView?
     
-    @objc fileprivate func handleLike() {
+    @objc  func handleLike() {
         saveSwipeToFirestore(didLike: 1)
         performSwipeAnimation(translation: 700, angle: 15)
     }
@@ -128,7 +128,8 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
     fileprivate func presentMatchView(cardUID: String) {
         let matchView = MatchView()
-        
+        matchView.cardUID = cardUID
+        matchView.currentUser = self.user
         view.addSubview(matchView)
         matchView.fillSuperview()
     }
@@ -160,10 +161,13 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         
         cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
         
+        
+        
         Firestore.firestore().fetchCurrentUser { (user, err) in
             if let err = err {
                 print("Failed to fetch user: ", err)
                 self.hud.dismiss()
+                return
             }
             
             self.user = user
@@ -259,7 +263,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         present(userDetailsController, animated: true)
     }
     
-    @objc fileprivate func handleDislike() {
+    @objc func handleDislike() {
         saveSwipeToFirestore(didLike: 0)
        performSwipeAnimation(translation: -700, angle: -15)
     }

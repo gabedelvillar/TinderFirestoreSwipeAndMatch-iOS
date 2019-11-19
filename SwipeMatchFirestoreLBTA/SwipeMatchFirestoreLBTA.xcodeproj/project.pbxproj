@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A00BC2423666CFD002933BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A00BC2323666CFD002933BD /* GoogleService-Info.plist */; };
+		0A0D5F7E237CBBF700F26EA6 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D5F7D237CBBF700F26EA6 /* SendMessageButton.swift */; };
+		0A0D5F80237CBF2500F26EA6 /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D5F7F237CBF2500F26EA6 /* KeepSwipingButton.swift */; };
 		0A30D57C236CF45000544C93 /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A30D57B236CF45000544C93 /* AgeRangeCell.swift */; };
 		0A386A44236F7733005A7D36 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A42236F7733005A7D36 /* LoginController.swift */; };
 		0A386A45236F7733005A7D36 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A386A43236F7733005A7D36 /* LoginViewModel.swift */; };
@@ -29,6 +31,7 @@
 		0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8ABF172347C59000972B01 /* CustomTextField.swift */; };
 		0A94FFCD2369F848000B62B3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCC2369F848000B62B3 /* SettingsController.swift */; };
 		0A94FFCF236A05BD000B62B3 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */; };
+		0AD0BF252384B594003D616B /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0BF242384B594003D616B /* Firebase+Utils.swift */; };
 		0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEB013B23401F0A00260EB7 /* Advertiser.swift */; };
 		0AF112882343D21C00ADB81F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF112872343D21C00ADB81F /* RegistrationController.swift */; };
 		0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8E9982368E3E700948F56 /* Bindable.swift */; };
@@ -37,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		0A00BC2323666CFD002933BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A0D5F7D237CBBF700F26EA6 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
+		0A0D5F7F237CBF2500F26EA6 /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
 		0A30D57B236CF45000544C93 /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
 		0A386A42236F7733005A7D36 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0A386A43236F7733005A7D36 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 		0A8ABF172347C59000972B01 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0A94FFCC2369F848000B62B3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		0AD0BF242384B594003D616B /* Firebase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
 		0AEB013B23401F0A00260EB7 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		0AF112872343D21C00ADB81F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0AF8E9982368E3E700948F56 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				0A7590492333E4E800DC9828 /* Extensions+UIView.swift */,
+				0AD0BF242384B594003D616B /* Firebase+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -174,6 +181,8 @@
 				0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */,
 				0A30D57B236CF45000544C93 /* AgeRangeCell.swift */,
 				0A43A060237B73D100911FCF /* MatchView.swift */,
+				0A0D5F7D237CBBF700F26EA6 /* SendMessageButton.swift */,
+				0A0D5F7F237CBF2500F26EA6 /* KeepSwipingButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,15 +330,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A386A48236F8362005A7D36 /* UserDetailsController.swift in Sources */,
+				0A0D5F80237CBF2500F26EA6 /* KeepSwipingButton.swift in Sources */,
 				0AF8E9992368E3E700948F56 /* Bindable.swift in Sources */,
 				0A7590392333E29000DC9828 /* HomeController.swift in Sources */,
 				0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */,
 				0A43A061237B73D100911FCF /* MatchView.swift in Sources */,
 				0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */,
 				0A75904D2333EC7300DC9828 /* HomeBottomControlsStackView.swift in Sources */,
+				0A0D5F7E237CBBF700F26EA6 /* SendMessageButton.swift in Sources */,
 				0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */,
 				0A7590372333E29000DC9828 /* AppDelegate.swift in Sources */,
 				0A30D57C236CF45000544C93 /* AgeRangeCell.swift in Sources */,
+				0AD0BF252384B594003D616B /* Firebase+Utils.swift in Sources */,
 				0A386A45236F7733005A7D36 /* LoginViewModel.swift in Sources */,
 				0A75904A2333E4E800DC9828 /* Extensions+UIView.swift in Sources */,
 				0A41BC8A233E854300D3E46D /* CardViewModel.swift in Sources */,
