@@ -33,7 +33,10 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    navigationController?.navigationBar.isHidden = true
+    
     topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+    topStackView.messagesButton.addTarget(self, action: #selector(handleMessages), for: .touchUpInside)
     bottomControls.refreshBtn.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
     bottomControls.likeBtn.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
     bottomControls.dislikeBtn.addTarget(self, action: #selector(handleDislike), for: .touchUpInside)
@@ -47,6 +50,11 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
  
   }
+    
+    @objc fileprivate func handleMessages() {
+        let vc = MatchesMessagesController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     var topCardView: CardView?
     
@@ -189,7 +197,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                 return
             }
             
-            guard let data = snapshot?.data() as? [String: Int] else {return}
+            let data = snapshot?.data() as? [String: Int] ?? [:]
             
             self.swipes = data
             self.fetchUsersFromFirestore()
@@ -214,16 +222,13 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         let minAge = user?.minSeekingAge ?? SettingsController.defaultMinSeekingAge
         let maxAge = user?.maxSeekingAge ?? SettingsController.defaultMaxSeekingAge
         
-        let hud = JGProgressHUD(style: .dark)
-        
-        hud.textLabel.text = "Fetching Users"
-        hud.show(in: self.view)
+       
         
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         
         topCardView = nil
             query.getDocuments { (snapshot, err) in
-                hud.dismiss()
+                self.hud.dismiss()
             
             if let err = err{
                 print("Faile to get users", err)
