@@ -56,6 +56,9 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    var users = [String: User]()
+    
     var topCardView: CardView?
     
     @objc  func handleLike() {
@@ -130,6 +133,27 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                 if hasMatch {
                     print("Has matched")
                     self.presentMatchView(cardUID: cardUID)
+                    
+                    guard let cardUser = self.users[cardUID] else {return}
+                    
+                    let data = ["name": cardUser.name ?? "", "profileImageURL": cardUser.imgUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                    
+                    Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(data) { (err) in
+                        if let err = err{
+                            print("Failed to save match info", err)
+                        }
+                    }
+                    
+                    
+                    guard let currentUser = self.user else {return}
+                                       
+                    let otherMatchdata = ["name": currentUser.name ?? "", "profileImageURL": currentUser.imgUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                                       
+                                       Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(otherMatchdata) { (err) in
+                                           if let err = err{
+                                               print("Failed to save match info", err)
+                                           }
+                                       }
                 }
         }
     }
@@ -224,7 +248,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         
        
         
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge).limit(to: 10)
         
         topCardView = nil
             query.getDocuments { (snapshot, err) in
@@ -240,6 +264,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
+                self.users[user.uid ?? ""] = user
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
                 
