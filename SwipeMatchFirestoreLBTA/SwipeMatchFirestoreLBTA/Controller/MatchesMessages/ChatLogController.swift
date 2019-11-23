@@ -86,10 +86,84 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         super.init()
     }
     
+    // input accessory view
+    
+    class CustomInputAcessView: UIView {
+        
+        let textView = UITextView()
+         let sendButton = UIButton(title: "SEND", titleColor: .black, font: .boldSystemFont(ofSize: 14), target: nil, action: nil)
+        
+        let placeholderLabel = UILabel(text: "Enter Message", font: .systemFont(ofSize: 16), textColor: .lightGray)
+        
+        override var intrinsicContentSize: CGSize {
+            return .zero
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            
+            backgroundColor = .white
+                   setupShadow(opacity: 0.1, radius: 8, offset: .init(width: 0, height: -8), color: .lightGray)
+                   autoresizingMask = .flexibleWidth
+                   
+                   
+                   
+                   
+                   textView.isScrollEnabled = false
+                   
+            textView.font = .systemFont(ofSize: 16)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(handleTextChange), name: UITextView.textDidChangeNotification, object: nil)
+                   
+                   hstack(textView,
+                                  sendButton.withSize(.init(width: 60, height: 60)),
+                                  alignment: .center
+                   ).withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
+            
+            addSubview(placeholderLabel)
+            placeholderLabel.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: sendButton.leadingAnchor, padding: .init(top: 0, left: 18, bottom: 0, right: 0))
+            placeholderLabel.centerYAnchor.constraint(equalTo: sendButton.centerYAnchor).isActive = true
+            
+        }
+        
+        @objc fileprivate func handleTextChange() {
+            placeholderLabel.isHidden = textView.text.count != 0
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+    
+    lazy var redView: UIView = {
+         let redView = CustomInputAcessView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+       
+        
+        
+        return redView
+    }()
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override var inputAccessoryView: UIView?{
+        get{
+            return redView
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.alwaysBounceVertical = true
+        
+        
+        collectionView.keyboardDismissMode = .interactive
         
         items = [
             .init(text: "A very long sting to show that the code we just implemented that does auto resizieng for cells actually works", isFromCurrentLoggedUser: true),
