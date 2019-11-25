@@ -9,67 +9,113 @@
 import LBTATools
 import Firebase
 
-struct Match {
-    let name, profileImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.name = dictionary["name"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-    }
-}
 
-class MatchCell: LBTAListCell<Match> {
+
+class RecentMessageCell: LBTAListCell<RecentMessages> {
     
-    let profileImageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"), contentMode: .scaleAspectFill)
+    let userProfileImageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"), contentMode: .scaleAspectFill)
+    let userNameLabel = UILabel(text: "USERNAME HERE", font: .boldSystemFont(ofSize: 18))
     
-    let usernameLbl = UILabel(text: "Username Here", font: .systemFont(ofSize: 14, weight: .semibold), textColor: .darkGray, textAlignment: .center, numberOfLines: 2)
+    let messageTextLabel = UILabel(text: "Some long line of text that should span 2 lines", font: .systemFont(ofSize: 16), textColor: .gray, numberOfLines: 2)
     
-    override var item: Match! {
-        didSet{
-            usernameLbl.text = item.name
-            profileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
+    override var item: RecentMessages! {
+        didSet {
+            userNameLabel.text = item.name
+            messageTextLabel.text = item.text
+            userProfileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
         }
     }
     
     override func setupViews() {
         super.setupViews()
         
-        profileImageView.clipsToBounds = true
-        profileImageView.constrainWidth(80)
-        profileImageView.constrainHeight(80)
-        profileImageView.layer.cornerRadius = 80 / 2
         
-        stack(stack(profileImageView, alignment: .center),
-              usernameLbl)
+        userProfileImageView.layer.cornerRadius = 94 / 2
+        
+        
+        hstack(userProfileImageView.withWidth(94).withHeight(94), stack(userNameLabel, messageTextLabel, spacing: 2), spacing: 20, alignment: .center).padLeft(20).padRight(20)
+        
+        
+        addSeparatorView(leadingAnchor: userNameLabel.leadingAnchor)
     }
 }
 
-class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+struct RecentMessages {
+    let text, uid, name, profileImageUrl: String
+    let timestamp: Timestamp
+    
+    init(dictionary: [String: Any]) {
+        self.text = dictionary["text"] as? String ?? ""
+        self.uid = dictionary["uid"] as? String ?? ""
+        self.name = dictionary["name"] as? String ?? ""
+        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
+        self.timestamp = dictionary["timestamp"] as? Timestamp ??
+            Timestamp(date: Date())
+    }
+}
+
+
+class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, RecentMessages, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+    
+    fileprivate func fetchRecentMessages() {
+        
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnaphot, err) in
+            if let err = err {
+                print(err)
+                return
+            }
+            
+            querySnaphot?.documentChanges.forEach({ (change) in
+                if change.type == .added {
+                    let dictionary = change.document.data()
+                    self.items.append(RecentMessages(dictionary: dictionary))
+                }
+            })
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    override func setupHeader (_ header: MatchesHeader) {
+        header.matchesHorizontalController.rootMatchesController = self
+    }
+    
+    
+    func didSelectMatchFromHeader(match: Match){
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 250)
+    }
     
     let customNavBar = MatchesNavBar()
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 120, height: 140)
-    }
+   
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let match = items[indexPath.item]
-        let chatLogController = ChatLogController(match: match)
-        
-        navigationController?.pushViewController(chatLogController, animated: true)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width, height: 140)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = [
-            .init(name: "test", profileImageUrl: "profile urs"),
-            .init(name: "test", profileImageUrl: "profile urs"),
-            .init(name: "test", profileImageUrl: "profile urs")
-        ]
+        fetchRecentMessages()
         
-        fetchMatches()
-        
+       
+        setupUI()
+
+    }
+    
+    fileprivate func setupUI() {
         collectionView.backgroundColor = .white
         
         customNavBar.backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
@@ -77,35 +123,20 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
         view.addSubview(customNavBar)
         customNavBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 0, height: 150))
         
-        collectionView.contentInset.top = 150
         
+        collectionView.contentInset.top = 150
+        collectionView.scrollIndicatorInsets.top = 150
+        
+        let statusBarCover = UIView(backgroundColor: .white)
+        view.addSubview(statusBarCover)
+        statusBarCover.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, trailing: view.trailingAnchor)
         
     }
     
-    fileprivate func fetchMatches() {
-        
-        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
-        
-        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("matches").getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Failed to get matches: ", err)
-                return
-            }
-            
-            var matches = [Match]()
-            
-            querySnapshot?.documents.forEach({ (documentSnapshot) in
-                let dictionary = documentSnapshot.data()
-                matches.append(.init(dictionary: dictionary))
-            })
-            
-            self.items = matches
-            self.collectionView.reloadData()
-        }
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 16, left: 0, bottom: 16, right: 0)
+        return .init(top: 0, left: 0, bottom: 16, right: 0)
     }
     
     @objc fileprivate func handleBack() {

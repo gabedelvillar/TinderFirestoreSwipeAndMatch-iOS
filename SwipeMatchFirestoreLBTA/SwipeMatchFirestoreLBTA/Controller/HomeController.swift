@@ -136,7 +136,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                     
                     guard let cardUser = self.users[cardUID] else {return}
                     
-                    let data = ["name": cardUser.name ?? "", "profileImageURL": cardUser.imgUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                    let data = ["name": cardUser.name ?? "", "profileImageURL": cardUser.imgUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())] as [String : Any]
                     
                     Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(data) { (err) in
                         if let err = err{
@@ -147,7 +147,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                     
                     guard let currentUser = self.user else {return}
                                        
-                    let otherMatchdata = ["name": currentUser.name ?? "", "profileImageURL": currentUser.imgUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                    let otherMatchdata = ["name": currentUser.name ?? "", "profileImageURL": currentUser.imgUrl1 ?? "", "uid": currentUser.uid ?? "", "timestamp": Timestamp(date: Date())] as [String : Any]
                                        
                                        Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(otherMatchdata) { (err) in
                                            if let err = err{

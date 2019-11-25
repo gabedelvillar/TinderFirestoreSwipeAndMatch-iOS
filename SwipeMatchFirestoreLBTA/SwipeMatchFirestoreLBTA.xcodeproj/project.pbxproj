@@ -32,6 +32,11 @@
 		0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8ABF172347C59000972B01 /* CustomTextField.swift */; };
 		0A94FFCD2369F848000B62B3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCC2369F848000B62B3 /* SettingsController.swift */; };
 		0A94FFCF236A05BD000B62B3 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */; };
+		0AA7B1B8238B5E6900FC4382 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7B1B7238B5E6900FC4382 /* Message.swift */; };
+		0AA7B1BA238B691500FC4382 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7B1B9238B691500FC4382 /* Match.swift */; };
+		0AA7B1BC238B694B00FC4382 /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7B1BB238B694B00FC4382 /* MatchCell.swift */; };
+		0AC4A8F4238C726800612474 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4A8F3238C726800612474 /* MatchesHeader.swift */; };
+		0AC4A8F6238C729900612474 /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4A8F5238C729900612474 /* MatchesHorizontalController.swift */; };
 		0AD0BF252384B594003D616B /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0BF242384B594003D616B /* Firebase+Utils.swift */; };
 		0AD0BF282384C2FE003D616B /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0BF272384C2FE003D616B /* MatchesMessagesController.swift */; };
 		0AD0BF2A2384CDAE003D616B /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0BF292384CDAE003D616B /* MatchesNavBar.swift */; };
@@ -69,6 +74,11 @@
 		0A8ABF172347C59000972B01 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0A94FFCC2369F848000B62B3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A94FFCE236A05BD000B62B3 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		0AA7B1B7238B5E6900FC4382 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		0AA7B1B9238B691500FC4382 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		0AA7B1BB238B694B00FC4382 /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
+		0AC4A8F3238C726800612474 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
+		0AC4A8F5238C729900612474 /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
 		0AD0BF242384B594003D616B /* Firebase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
 		0AD0BF272384C2FE003D616B /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		0AD0BF292384CDAE003D616B /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
@@ -114,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				0A3E3E982387C40500216DA7 /* MessagesNavBar.swift */,
+				0AA7B1BB238B694B00FC4382 /* MatchCell.swift */,
+				0AC4A8F3238C726800612474 /* MatchesHeader.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -208,6 +220,8 @@
 			children = (
 				0AEB013B23401F0A00260EB7 /* Advertiser.swift */,
 				0A89863A233E7B5A00867388 /* User.swift */,
+				0AA7B1B7238B5E6900FC4382 /* Message.swift */,
+				0AA7B1B9238B691500FC4382 /* Match.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +231,7 @@
 			children = (
 				0AD0BF272384C2FE003D616B /* MatchesMessagesController.swift */,
 				0A3E3E952387BBCC00216DA7 /* ChatLogController.swift */,
+				0AC4A8F5238C729900612474 /* MatchesHorizontalController.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -361,12 +376,17 @@
 				0A5B75AB2349619C002E89E8 /* RegistrationViewModel.swift in Sources */,
 				0A43A061237B73D100911FCF /* MatchView.swift in Sources */,
 				0A8ABF182347C59000972B01 /* CustomTextField.swift in Sources */,
+				0AC4A8F4238C726800612474 /* MatchesHeader.swift in Sources */,
 				0A75904D2333EC7300DC9828 /* HomeBottomControlsStackView.swift in Sources */,
 				0A0D5F7E237CBBF700F26EA6 /* SendMessageButton.swift in Sources */,
+				0AA7B1BA238B691500FC4382 /* Match.swift in Sources */,
 				0AEB013C23401F0A00260EB7 /* Advertiser.swift in Sources */,
 				0A7590372333E29000DC9828 /* AppDelegate.swift in Sources */,
+				0AC4A8F6238C729900612474 /* MatchesHorizontalController.swift in Sources */,
 				0A3E3E992387C40500216DA7 /* MessagesNavBar.swift in Sources */,
 				0A30D57C236CF45000544C93 /* AgeRangeCell.swift in Sources */,
+				0AA7B1B8238B5E6900FC4382 /* Message.swift in Sources */,
+				0AA7B1BC238B694B00FC4382 /* MatchCell.swift in Sources */,
 				0AD0BF282384C2FE003D616B /* MatchesMessagesController.swift in Sources */,
 				0AD0BF252384B594003D616B /* Firebase+Utils.swift in Sources */,
 				0A386A45236F7733005A7D36 /* LoginViewModel.swift in Sources */,
