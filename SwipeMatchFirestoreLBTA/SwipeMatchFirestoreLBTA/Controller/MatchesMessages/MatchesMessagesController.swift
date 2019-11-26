@@ -57,26 +57,62 @@ struct RecentMessages {
 
 class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, RecentMessages, MatchesHeader>, UICollectionViewDelegateFlowLayout {
     
+    var recentMessagesDictionary = [String: RecentMessages]()
+    
+    var listener: ListenerRegistration?
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if isMovingFromParent{
+            listener?.remove()
+        }
+    }
+    
     fileprivate func fetchRecentMessages() {
         
         guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages")
         
-        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnaphot, err) in
+        listener = query.addSnapshotListener { (querySnaphot, err) in
             if let err = err {
                 print(err)
                 return
             }
             
             querySnaphot?.documentChanges.forEach({ (change) in
-                if change.type == .added {
+                if change.type == .added || change.type == .modified{
                     let dictionary = change.document.data()
-                    self.items.append(RecentMessages(dictionary: dictionary))
+                    
+                    let recentMessage = RecentMessages(dictionary: dictionary)
+                    self.recentMessagesDictionary[recentMessage.uid] = recentMessage
+                    
+                   
+                    
                 }
             })
             
-            self.collectionView.reloadData()
+            self.resetItems()
         }
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recentMessage = self.items[indexPath.item]
+        let dictionary = ["name": recentMessage.name, "profileImageUrl": recentMessage.profileImageUrl, "uid": recentMessage.uid]
+        let match = Match(dictionary: dictionary)
+        let controller = ChatLogController(match: match)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    fileprivate func resetItems() {
+        let values = Array(recentMessagesDictionary.values)
+        items = values.sorted(by: { (rm1, rm2) -> Bool in
+            return rm1.timestamp.compare(rm2.timestamp) == .orderedDescending
+        })
+        
+        collectionView.reloadData()
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0

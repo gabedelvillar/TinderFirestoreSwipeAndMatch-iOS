@@ -21,6 +21,7 @@ class CustomImagePickerkController: UIImagePickerController {
 
 class SettingsController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    
     var delegate: SettingsControllerDelegate?
     
     lazy var imgBtn1 = createButton(selector: #selector(handleSelectPhoto))

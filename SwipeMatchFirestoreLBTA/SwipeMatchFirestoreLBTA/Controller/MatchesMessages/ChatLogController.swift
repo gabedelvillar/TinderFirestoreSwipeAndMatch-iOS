@@ -149,6 +149,35 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     
     @objc fileprivate func handleSend() {
         
+        saveToFromMessages()
+        
+        saveToFromRecentMessages()
+        
+        
+        
+    }
+    
+    fileprivate func saveToFromRecentMessages() {
+         guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        
+        let data = ["text": customInputView.textView.text ?? "", "name": match.name, "profileImageUrl": match.profileImageUrl, "timestamp": Timestamp(date: Date()), "uid": match.uid] as [String : Any]
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").document(match.uid).setData(data) { (err) in
+            if let err = err{
+                print(err)
+                return
+            }
+            
+            // save the other direction
+            guard let currentUser = self.currentUser else {return}
+            let toData = ["text": self.customInputView.textView.text ?? "", "name": currentUser.name ?? "", "profileImageUrl": currentUser.imgUrl1 ?? "", "timestamp": Timestamp(date: Date()), "uid": currentUser.uid] as [String : Any]
+            
+            Firestore.firestore().collection("matches_messages").document(self.match.uid).collection("recent_messages").document(currentUserId).setData(toData )
+            
+            
+        }
+    }
+    
+    fileprivate func saveToFromMessages() {
         guard let currentUserId = Auth.auth().currentUser?.uid else {return}
         
         let collection = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid)
@@ -185,8 +214,6 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
             
         }
 
-        
-        
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -199,6 +226,8 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         }
     }
     
+    var listener: ListenerRegistration?
+    
     
     fileprivate func fetchMessages() {
         print("Fetching messages")
@@ -207,7 +236,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         
         let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid).order(by: "timestamp")
         
-        query.addSnapshotListener { (querySnapshot, err) in
+        listener = query.addSnapshotListener { (querySnapshot, err) in
             if let err = err{
                 print("Failed to fetch messages", err)
                 
@@ -227,14 +256,36 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
             self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
         }
         
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if isMovingFromParent {
+            listener?.remove()
+        }
     }
     
     
+    var currentUser: User?
     
+    fileprivate func fetchCurrentUser(){
+        Firestore.firestore().collection("users").document(Auth.auth().currentUser?.uid ?? "").getDocument { (snpashot, err) in
+            
+            if let err = err {
+                print(err)
+                return
+            }
+            let data = snpashot?.data() ?? [:]
+            self.currentUser = User(dictionary: data)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchCurrentUser()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         collectionView.keyboardDismissMode = .interactive
